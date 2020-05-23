@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HLS Web Player</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+    <h1>HLS Web Player</h1>
+    <h2>Source URL</h2>
+
+    <p>Enter your video URL</p>
+    <form>
+        <div>
+            <label for="url-input"></label>>
+            <input id="url-input" size="75" type="text" placeholder="Enter your source URL">
+            <br>
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+
+    <p>Select video from list</p>
+    <form>
+        <div>
+            <label for="video-select"></label>
+            <select name="video-select" id="video-select">
+                <option id="default-select-bar" value="" selected disabled hidden>Select video</option>
+                <option value="1">Big Buck Bunny</option>
+                <option value="2">Rock Band Interview</option>
+                <option value="3">Color Demo</option>
+            </select>
+            <input type="submit" value="Submit">
+            <br><br>
+        </div>
+    </form>
+
+    <div>
+        <video width="800" height="600" id="video" controls preload="metadata"></video>
+    </div>
+    <div id="video-controls" class="controls" data-state="hidden">
+        <button id="playpause" type="button" data-state="play">Play/Pause</button>
+        <button id="stop" type="button" data-state="stop">Stop</button>
+        <div class="progress">
+            <progress id="progress" value="0" min="0">
+                <span id="progress-bar"></span>
+            </progress>
+        </div>
+        <button id="mute" type="button" data-state="mute">Mute/Unmute</button>
+        <button id="volinc" type="button" data-state="volup">Vol+</button>
+        <button id="voldec" type="button" data-state="voldown">Vol-</button>
+        <button id="fs" type="button" data-state="go-fullscreen">Fullscreen</button>
+    </div>
+
+    <h2>Quality Control</h2>
+    <div>
+
+    </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<!-- Or if you want a more recent canary version -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/hls.js@canary"></script> -->
+<script src="js/hls.client.js"></script>
+</body>
+</html>
