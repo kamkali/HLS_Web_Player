@@ -1,10 +1,10 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
-const hls = require('hls.js');
 
 const app = express();
 
-const PORT = process.env.PORT || 9090;
+const PORT = process.env.PORT;
 
 app.use(express.static(path.join(__dirname, 'public')));
 
