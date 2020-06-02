@@ -1,6 +1,8 @@
 let videoSrc;
 const hls = new Hls();
 
+const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 const setQuality = level => {
     let setLevel = level;
     hls.currentLevel = setLevel;
@@ -11,11 +13,13 @@ const setQuality = level => {
 
 const loadAndPlayVideo = videoSrc => {
     if (Hls.isSupported()) {
+        hls.detachMedia();
         hls.loadSource(videoSrc);
         hls.attachMedia(video);
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
             video.play();
             setQuality(-1);
+            updateVideoDetails();
         });
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.src = videoSrc;
@@ -50,7 +54,6 @@ document.getElementById('submit-button').addEventListener('click', e => {
     loadAndPlayVideo(videoSrc);
 });
 
-
 document.getElementById('btn-1').addEventListener('click', e => setQuality(-1));
 
 document.getElementById('btn0').addEventListener('click', e => setQuality(0));
@@ -64,3 +67,20 @@ document.getElementById('btn3').addEventListener('click', e => setQuality(3));
 document.getElementById('btn4').addEventListener('click', e => setQuality(4));
 
 loadAndPlayVideo(videoSrc);
+
+const updateVideoDetails = () => {
+    const lvl = hls.currentLevel;
+    if(!hls.levels || lvl === -1) {
+        wait(100).then(updateVideoDetails);
+        return;
+    }
+    document.getElementById('bitrate').innerText = `Bitrate: ${Math.round(hls.levels[lvl].bitrate / 1024)} [kbp/s]`;
+    document.getElementById('height').innerText = `Height: ${hls.media.height}`;
+    document.getElementById('width').innerText = `Width: ${hls.media.width}`;
+    document.getElementById('video-codec').innerText = `Video codec: ${hls.levels[lvl].videoCodec}`;
+    document.getElementById('audio-codec').innerText = `Audio codec: ${hls.levels[lvl].audioCodec}`;
+
+    wait(100).then(updateVideoDetails);
+}
+
+updateVideoDetails();

@@ -8,35 +8,46 @@
 </head>
 <body>
     <h1>HLS Web Player</h1>
-    <h2>Source URL</h2>
+    <div class="row">
+        <div class="column">
+            <h2>Source URL</h2>
 
-    <p>Enter your video URL</p>
-    <form>
-        <div>
-            <label for="url-input"></label>
-            <input id="url-input" size="75" type="text" placeholder="Enter your source URL">
-            <br>
-            <button id="submit-button" name="submit-button" type="button" value=>Submit</button>
+            <p>Enter your video URL</p>
+            <form>
+                <div>
+                    <label for="url-input"></label>
+                    <input id="url-input" size="75" type="text" placeholder="Enter your source URL">
+                    <br>
+                    <button id="submit-button" name="submit-button" type="button" value=>Submit</button>
+                </div>
+            </form>
+
+            <p>Select video from list</p>
+            <form>
+                <div>
+                    <label for="video-select"></label>
+                    <select name="video-select" id="video-select">
+                        <option id="default-select-bar" value="" selected disabled hidden>Select video</option>
+                        <option value="1">Big Buck Bunny</option>
+                        <option value="2">Rock Band Interview</option>
+                        <option value="3">Adventure Movie</option>
+                    </select>
+                    <input type="submit" value="Submit">
+                    <br><br>
+                </div>
+            </form>
         </div>
-    </form>
-
-    <p>Select video from list</p>
-    <form>
-        <div>
-            <label for="video-select"></label>
-            <select name="video-select" id="video-select">
-                <option id="default-select-bar" value="" selected disabled hidden>Select video</option>
-                <option value="1">Big Buck Bunny</option>
-                <option value="2">Rock Band Interview</option>
-                <option value="3">Adventure Movie</option>
-            </select>
-            <input type="submit" value="Submit">
-            <br><br>
+        <div class="column">
+            <h2>Video details</h2>
+            <p id="bitrate">Bitrate: </p>
+            <p id="height">Height: </p>
+            <p id="width">Width: </p>
+            <p id="video-codec">Video codec: </p>
+            <p id="audio-codec">Audio codec: </p>
         </div>
-    </form>
-
+    </div>
     <div>
-        <video width="800" height="600" id="video" controls preload="metadata"></video>
+        <video width="800" height="600" id="video" autoplay="false" controls preload="metadata"></video>
     </div>
     <div id="video-controls" class="controls" data-state="hidden">
         <button id="playpause" type="button" data-state="play">Play/Pause</button>
